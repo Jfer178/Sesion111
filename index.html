@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJERCICIOS DE BUCLES</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/index.js"></script>
+</head>
+
+<body>
+
+    <h1>EJERCICIO N1</h1>
+
+    <h2>CALIFICACION NUMERICA 1-100</h2>
+    <p> Ingresa una calificacion numerica entre 0 y 100</p>
+
+    <div class="container">
+        <input type="number" id="inputA" placeholder="DIGITE" />
+        <div class="results" id="results"></div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="VerificacionCalificaciones()">CALCULAR</button>
+    </div>
+
+    <script>
+        function VerificacionCalificaciones() {
+            const a = parseFloat(document.getElementById('inputA').value);
+            let resultados = '';
+
+            if (isNaN(a)) {
+                resultados = 'Por favor, ingresa números válidos.';
+            } else if (a >= 90) {
+                resultados = '¡APROBADO CON HONORES!';
+
+            } else if (a >= 70 && a < 90) {
+                resultados = '¡APROBADO!';
+
+            } else if (a < 70) {
+                resultados = '¡REPROBADO!';
+
+            }
+
+            document.getElementById('results').innerHTML = resultados;
+        }
+    </script>
+
+    <h1>EJERCICIO 2</h1>
+
+    <h2>DETERMNIE NUMERO PAR O IMPAR</h2>
+    <p> Ingresa un numero</p>
+
+    <div class="container-PARIMPAR">
+        <input type="number" id="inputB" placeholder="DIGITE" />
+        <div class="resultsPARIMPAR" id="resultsPARIMPAR"></div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="DeterminaNumeroParoImpar()">CALCULAR</button>
+    </div>
+
+    <script>
+        function DeterminaNumeroParoImpar() {
+            const b = parseFloat(document.getElementById('inputB').value);
+            let ResultadosPARIMPAR = '';
+
+            if (isNaN(b)) {
+                ResultadosPARIMPAR = 'Por favor, ingresa números válidos.';
+            } else if (b % 2 === 0) {
+                ResultadosPARIMPAR = 'EL NUMERO ES PAR';
+            } else {
+                ResultadosPARIMPAR = 'EL NUMERO ES IMPAR';
+            }
+
+            document.getElementById('resultsPARIMPAR').innerHTML = ResultadosPARIMPAR;
+        }
+    </script>
+
+    <h1>EJERCICIO 3</h1>
+
+    <h2>EVALUACION DE DESCUENTOS</h2>
+    <p>Ingresa un monto total de su compra</p>
+
+    <div class="container-COMPRA">
+        <input type="number" id="inputC" placeholder="DIGITE" />
+        <div class="resultsCOMPRA" id="resultsCOMPRA"></div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="EvaluacionDeDescuentos()">CALCULAR</button>
+    </div>
+
+    <script>
+        function EvaluacionDeDescuentos() {
+            const c = parseFloat(document.getElementById('inputC').value);
+            let Porcentaje = 0.10;
+            let ResultadosDescuentos = '';
+
+            if (isNaN(c)) {
+                ResultadosDescuentos = 'Por favor, ingresa números válidos.';
+            } else if (c > 100) {
+                function descuento(c, Porcentaje) {
+                    return c * Porcentaje;
+                }
+
+                const valorDescuento = descuento(c, Porcentaje);
+                ResultadosDescuentos = 'SE LE APLICARÁ UN DESCUENTO DEL 10%: ' + valorDescuento.toFixed(2);
+
+            } else if (c <= 100) {
+                ResultadosDescuentos = 'EL DESCUENTO NO APLICA: ' + c.toFixed(2);
+            }
+
+            document.getElementById('resultsCOMPRA').innerHTML = ResultadosDescuentos;
+        }
+    </script>
+
+    <h1>EJERCICIO 4</h1>
+
+    <h2>JUEGO DE ADIVINANZA</h2>
+    <p>Adivina el numero aleatorio entre 1 y 10</p>
+
+    <div class="container-ADIVINANZA">
+        <input type="number" id="inputD" placeholder="DIGITE" />
+        <div class="resultsADIVINANZA" id="resultsADIVINANZA"></div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="JugarAdivinanzas()">ADIVINAR</button>
+    </div>
+
+    <script>
+
+        let numeroAleatorio;
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function JugarAdivinanzas() {
+            const d = parseInt(document.getElementById('inputD').value);
+            let ResultadosAdivinanzas = '';
+
+            if (numeroAleatorio === undefined) {
+                numeroAleatorio = getRandomInt(1, 10);
+            }
+
+            if (isNaN(d)) {
+                ResultadosAdivinanzas = 'Por favor, ingresa un número';
+            } else if (d === numeroAleatorio) {
+                ResultadosAdivinanzas = '¡FELICIDADES, ADIVINASTE EL NÚMERO!';
+                numeroAleatorio = undefined;
+            } else {
+                ResultadosAdivinanzas = 'LO SIENTO, EL NÚMERO ERA ' + numeroAleatorio;
+                numeroAleatorio = undefined;
+            }
+
+            document.getElementById('resultsADIVINANZA').innerHTML = ResultadosAdivinanzas;
+        }
+    </script>
+
+    <h1>BUCLES</h1>
+    <h2>PARTE 1</h2>
+    <p>Arreglo de números y Suma total</p>
+
+    <div id="resultado"></div>
+
+    <div class="button-container">
+        <button onclick="ARREGLOS()">BUCLES</button>
+    </div>
+
+    <script>
+        let resultadoDiv = document.getElementById("resultado");
+        let Suma = 0;
+
+        function ARREGLOS() {
+            resultadoDiv.innerHTML = "";
+            Suma = 0;
+
+            for (let i = 0; i < 20; i++) {
+                resultadoDiv.innerHTML += "Valor de i: " + i + "<br>";
+            }
+
+            resultadoDiv.innerHTML += "<br>";
+
+            for (let i = 0; i < 20; i++) {
+                Suma += i;
+            }
+            resultadoDiv.innerHTML += "LA SUMA ES: " + Suma;
+        }
+
+    </script>
+
+    <h2>PARTE 2</h2>
+    <p>Bucle while que solicita un numero hasta que se ingrese uno negativo.</p>
+
+    <div class="button-container">
+        <button onclick="BUCLE_WHILE()">BUCLES</button>
+    </div>
+    <div id="resultadoWhile"></div>
+
+    <script>
+        function BUCLE_WHILE() {
+            let resultadoWhileDiv = document.getElementById("resultadoWhile");
+            resultadoWhileDiv.innerHTML = "";
+            let numero;
+
+            do {
+                numero = parseInt(prompt("Ingresa un número (negativo para salir):"));
+                resultadoWhileDiv.innerHTML += "Número ingresado: " + numero + "<br>";
+            } while (numero >= 0);
+        }
+    </script>
+
+    <h2>PARTE 3</h2>
+    <p>Solicitar contraseña hasta que sea correcta.</p>
+
+    <div class="button-container">
+        <button onclick="BUCLE_DO_WHILE()">BUCLES</button>
+    </div>
+    <div id="resultadoDoWhile"></div>
+
+    <script>
+        function BUCLE_DO_WHILE() {
+            let resultadoDoWhileDiv = document.getElementById("resultadoDoWhile");
+            resultadoDoWhileDiv.innerHTML = "";
+            const CONTRASENA_CORRECTA = "1234";
+            let contrasena;
+            let intentos = 0;
+
+            do {
+                contrasena = prompt("Ingresa la contraseña:");
+                intentos++;
+            } while (contrasena !== CONTRASENA_CORRECTA);
+            resultadoDoWhileDiv.innerHTML = "Contraseña correcta! Número de intentos: " + intentos;
+        }
+    </script>
+
+    <footer>
+        <p>Copyright © 2024- 1 - NOV - JEREMY FONTALVO </p>
+    </footer>
+
+</body>
+
+</html>
